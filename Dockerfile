@@ -10,6 +10,7 @@ RUN apk add --no-cache \
     libsodium \
     && apk add --no-cache --virtual .build-deps \
     $PHPIZE_DEPS \
+    linux-headers \
     oniguruma-dev \
     libsodium-dev \
     && docker-php-ext-install \
