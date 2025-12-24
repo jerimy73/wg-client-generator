@@ -1,25 +1,10 @@
-# ---------- Composer deps ----------
-FROM composer:2 AS vendor
-WORKDIR /app
-COPY composer.json composer.lock ./
-RUN composer install --no-dev --prefer-dist --no-interaction --no-progress
-COPY . .
-RUN composer dump-autoload --optimize --no-dev
-
-# ---------- Vite build ----------
-FROM node:20-alpine AS assets
-WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm ci
-COPY . .
-RUN npm run build
-
-# ---------- Runtime: PHP-FPM (production) ----------
-FROM php:8.3-fpm-alpine AS app
+# ---------- Base PHP build (with required PHP extensions) ----------
+FROM php:8.3-fpm-alpine AS php_base
 WORKDIR /var/www/html
 
-# Minimal libs for required PHP extensions on Alpine:
-
+# Minimal libs for our required PHP extensions:
+# - mbstring needs oniguruma
+# - sodium needs libsodium
 RUN apk add --no-cache \
     oniguruma \
     libsodium \
@@ -35,19 +20,46 @@ RUN apk add --no-cache \
     opcache \
     && apk del .build-deps
 
-# Copy app
+# ---------- Vendor stage (composer install on correct platform) ----------
+FROM php_base AS vendor
+WORKDIR /var/www/html
+
+# Install composer (minimal, official installer)
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+    && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
+    && rm composer-setup.php
+
+COPY composer.json composer.lock ./
+RUN composer install --no-dev --prefer-dist --no-interaction --no-progress --no-scripts
+
+# Now copy full source for autoload optimization if needed
 COPY . .
-COPY --from=vendor /app/vendor ./vendor
+RUN composer dump-autoload --optimize --no-dev
+
+
+# ---------- Assets stage (Vite build) ----------
+FROM node:20-alpine AS assets
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+
+# ---------- Runtime stage ----------
+FROM php_base AS app
+WORKDIR /var/www/html
+
+COPY . .
+COPY --from=vendor /var/www/html/vendor ./vendor
 COPY --from=assets /app/public/build ./public/build
 
-# PHP opcache config
 COPY docker/php/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 
-# Entrypoint
+# (Optional) entrypoint minimal (cache only). Kalau kamu mau tanpa entrypoint, bilang.
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-# Laravel writable dirs
 RUN mkdir -p storage bootstrap/cache \
     && chown -R www-data:www-data storage bootstrap/cache
 
