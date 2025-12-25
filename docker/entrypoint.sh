@@ -3,9 +3,9 @@ set -e
 cd /var/www/html
 
 if [ -z "${APP_KEY:-}" ]; then
-  echo "ERROR: APP_KEY is empty. Set APP_KEY in .env"
-  exit 1
+  echo "WARNING: APP_KEY is empty. Container will start, generate APP_KEY manually with artisan."
 fi
+
 
 php artisan config:cache || true
 php artisan route:cache || true
