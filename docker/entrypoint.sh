@@ -1,16 +1,30 @@
 #!/bin/sh
+
 set -e
 
-cd /var/www/html
+echo "Checking for RUN_MIGRATIONS flag..."
 
-# Pastikan folder writable ada
-mkdir -p storage bootstrap/cache
+if [ "$RUN_MIGRATIONS" = "true" ]; then
+    echo "Running database migrations..."
+    php artisan migrate --force
+fi
 
-# Fix permission untuk bind-mount (sering root-owned setelah pull)
-chown -R www-data:www-data storage bootstrap/cache || true
-chmod -R ug+rwX storage bootstrap/cache || true
+if [ "$APP_KEY" = "" ]; then
+    echo "Generating application key..."
+    php artisan key:generate --force
+fi
 
-# Kalau kamu pakai database untuk cache/session/queue, tabel harus ada lewat migrate
-# Jangan migrate otomatis di entrypoint kecuali kamu yakin.
+if [ ! -f storage/installed ]; then
+    echo "Running initial setup..."
+    
+    # Cache configuration
+    php artisan config:cache
+    php artisan route:cache
+    php artisan view:cache
+    
+    # Create installed flag
+    touch storage/installed
+fi
 
+echo "Starting PHP-FPM..."
 exec "$@"
