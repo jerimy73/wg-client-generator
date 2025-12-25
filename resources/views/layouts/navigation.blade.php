@@ -22,7 +22,7 @@
                 {{-- Tombol Test Page: Selalu muncul di HP & Desktop --}}
                 <a href="{{ route('mt.test') }}"
                    class="inline-flex items-center rounded-xl px-3 py-2 text-xs sm:text-sm font-bold
-                          {{ request()->routeIs('mt.test') ? 'bg-sky-600 text-white shadow-sm' : 'text-sky-900  hover:bg-white' }}">
+                          {{ request()->routeIs('mt.test') ? 'bg-white/70 text-sky-900 ring-1 ring-sky-300' : 'text-sky-900  hover:bg-white' }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe-lock-icon lucide-globe-lock"><path d="M15.686 15A14.5 14.5 0 0 1 12 22a14.5 14.5 0 0 1 0-20 10 10 0 1 0 9.542 13"/><path d="M2 12h8.5"/><path d="M20 6V4a2 2 0 1 0-4 0v2"/><rect width="8" height="5" x="14" y="6" rx="1"/></svg>
                     <span>Test Page</span>
                 </a>
@@ -30,7 +30,7 @@
                 {{-- User Dropdown --}}
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="flex items-center rounded-xl bg-white/70 p-2 sm:px-3 sm:py-2 text-xs sm:text-sm font-semibold text-sky-900 ring-1 ring-sky-300 hover:bg-white">
+                        <button class="flex items-center rounded-xl bg-yellow-100 p-2 sm:px-3 sm:py-2 text-xs sm:text-sm font-semibold text-sky-900 ring-1  hover:bg-white">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock-keyhole-icon lucide-lock-keyhole"><circle cx="12" cy="16" r="1"/><rect x="3" y="10" width="18" height="12" rx="2"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/></svg>
                             <span class="hidden sm:inline-block me-2">{{ Auth::user()->name }}</span>
                             <svg class="h-5 w-5 sm:h-4 sm:w-4 fill-current" viewBox="0 0 20 20">
