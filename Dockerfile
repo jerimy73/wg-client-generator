@@ -61,9 +61,4 @@ COPY docker/php/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-RUN mkdir -p storage bootstrap/cache \
-    && chown -R www-data:www-data storage bootstrap/cache
-
-USER www-data
-ENTRYPOINT ["/entrypoint.sh"]
 CMD ["php-fpm", "-F"]
