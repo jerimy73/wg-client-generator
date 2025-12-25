@@ -71,9 +71,9 @@ COPY --from=assets /app/public/build ./public/build
 # Copy configuration
 COPY docker/php/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 
-# Create entrypoint
-COPY docker/entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+# # Create entrypoint
+# COPY docker/entrypoint.sh /entrypoint.sh
+# RUN chmod +x /entrypoint.sh
 
 # Set permissions
 RUN mkdir -p storage bootstrap/cache \
@@ -82,5 +82,5 @@ RUN mkdir -p storage bootstrap/cache \
 
 USER www-data
 
-ENTRYPOINT ["/entrypoint.sh"]
+# ENTRYPOINT ["/entrypoint.sh"]
 CMD ["php-fpm", "-F"]

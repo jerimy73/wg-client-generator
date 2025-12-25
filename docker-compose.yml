@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   wg-manager:
     container_name: wg-manager
