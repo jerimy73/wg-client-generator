@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
+        <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -32,5 +33,23 @@
                 {{ $slot }}
             </main>
         </div>
+        <!-- Toast Notification -->
+        @if (session('status') || session('success') || session('error') || session('warning') || session('info'))
+            @php
+                $type = session('error') ? 'error' : 
+                        (session('warning') ? 'warning' : 
+                        (session('info') ? 'info' : 'success'));
+                $message = session('status') ?: 
+                          (session('success') ?: 
+                          (session('error') ?: 
+                          (session('warning') ?: session('info'))));
+            @endphp
+            <x-toast :type="$type" :message="$message" />
+        @else
+            <x-toast />
+        @endif
+
+        <!-- Scripts -->
+        @stack('scripts')
     </body>
 </html>
