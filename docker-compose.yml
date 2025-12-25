@@ -40,8 +40,8 @@ services:
     environment:
       MYSQL_DATABASE: wg_manager
       MYSQL_USER: wg_manager
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_PASSWORD: mCIaahew!2002$1@
+      MYSQL_ROOT_PASSWORD: AduRy29!2002$1@
     volumes:
       - wg_manager_db:/var/lib/mysql
     restart: unless-stopped
