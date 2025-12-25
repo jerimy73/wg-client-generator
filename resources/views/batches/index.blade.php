@@ -53,8 +53,8 @@
                             <p class="text-sm font-medium text-slate-500">Total Batch</p>
                             <p class="mt-1 text-2xl font-semibold text-slate-900">{{ $total }}</p>
                         </div>
-                        <div class="rounded-2xl bg-slate-50 p-3 ring-1 ring-slate-200">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-600" viewBox="0 0 24 24" fill="currentColor">
+                        <div class="rounded-2xl bg-sky-200 p-3 ring-1 ring-white-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black-600" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M4 7a3 3 0 013-3h10a3 3 0 013 3v10a3 3 0 01-3 3H7a3 3 0 01-3-3V7zm3-1a1 1 0 00-1 1v1h12V7a1 1 0 00-1-1H7zm11 5H6v6a1 1 0 001 1h10a1 1 0 001-1v-6z"/>
                             </svg>
                         </div>
@@ -67,10 +67,8 @@
                             <p class="text-sm font-medium text-slate-500">Draft (halaman ini)</p>
                             <p class="mt-1 text-2xl font-semibold text-slate-900">{{ $draft }}</p>
                         </div>
-                        <div class="rounded-2xl bg-slate-50 p-3 ring-1 ring-slate-200">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-600" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M7 3a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V9.414a2 2 0 00-.586-1.414l-2.414-2.414A2 2 0 0016.586 5H7zm9 3.414L18.586 9H16a0 0 0 010 0V6.414z"/>
-                            </svg>
+                        <div class="rounded-2xl bg-gray-200 p-3 ring-1 ring-white-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-notepad-text-dashed-icon lucide-notepad-text-dashed"><path d="M8 2v4"/><path d="M12 2v4"/><path d="M16 2v4"/><path d="M16 4h2a2 2 0 0 1 2 2v2"/><path d="M20 12v2"/><path d="M20 18v2a2 2 0 0 1-2 2h-1"/><path d="M13 22h-2"/><path d="M7 22H6a2 2 0 0 1-2-2v-2"/><path d="M4 14v-2"/><path d="M4 8V6a2 2 0 0 1 2-2h2"/><path d="M8 10h6"/><path d="M8 14h8"/><path d="M8 18h5"/></svg>
                         </div>
                     </div>
                 </div>
@@ -81,10 +79,8 @@
                             <p class="text-sm font-medium text-slate-500">Generated (halaman ini)</p>
                             <p class="mt-1 text-2xl font-semibold text-slate-900">{{ $generated }}</p>
                         </div>
-                        <div class="rounded-2xl bg-indigo-50 p-3 ring-1 ring-indigo-200">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5a1 1 0 10-2 0v5a1 1 0 00.293.707l3 3a1 1 0 001.414-1.414L13 11.586V7z"/>
-                            </svg>
+                        <div class="rounded-2xl bg-green-200 p-3 ring-1 ring-white-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-monitor-check-icon lucide-monitor-check"><path d="m9 10 2 2 4-4"/><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M12 17v4"/><path d="M8 21h8"/></svg>
                         </div>
                     </div>
                 </div>
@@ -109,15 +105,15 @@
 
                     <div class="flex items-center gap-2">
                         <button data-status="all"
-                                class="statusBtn rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">
+                                class="statusBtn rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-black-200 hover:bg-sky-500">
                             Semua
                         </button>
                         <button data-status="draft"
-                                class="statusBtn rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">
+                                class="statusBtn rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-black-200 hover:bg-sky-500">
                             Draft
                         </button>
                         <button data-status="generated"
-                                class="statusBtn rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">
+                                class="statusBtn rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-black-200 hover:bg-sky-500">
                             Generated
                         </button>
                     </div>

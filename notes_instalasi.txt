@@ -4,6 +4,17 @@
 4. composer require evilfreelancer/routeros-api-php
 
 
+# Berikan akses ke www-data (user yang menjalankan PHP-FPM/nginx)
+sudo chown -R www-data:www-data /var/www/wg-manager/
+sudo chmod -R 755 /var/www/wg-manager/
+
+# Atau gunakan kombinasi yang lebih aman:
+sudo chown -R $USER:www-data /var/www/wg-manager/
+sudo chmod -R 775 /var/www/wg-manager/storage/
+sudo chmod -R 775 /var/www/wg-manager/bootstrap/cache/
+sudo chmod -R 775 /var/www/wg-manager/public/
+
+
 cd /var/www/wg-manager \
 && git pull \
 && composer install --no-dev --optimize-autoloader \
