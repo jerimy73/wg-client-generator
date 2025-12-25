@@ -49,9 +49,15 @@ RUN composer dump-autoload --optimize --no-dev
 FROM node:20-alpine AS assets
 WORKDIR /app
 
+# Copy semua file yang diperlukan untuk build Vite
 COPY package.json package-lock.json ./
-RUN npm ci --only=production
-COPY . .
+COPY vite.config.js ./
+COPY tailwind.config.js ./
+COPY postcss.config.js ./
+COPY resources ./resources
+
+# Install dan build
+RUN npm ci
 RUN npm run build
 
 # ---------- Runtime stage ----------
