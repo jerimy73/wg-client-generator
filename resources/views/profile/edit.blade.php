@@ -31,6 +31,17 @@
                                 @include('profile.partials.update-password-form')
                             </div>
                         </div>
+
+                        {{-- Card : 2FA --}}
+                        <div class="rounded-2xl border border-sky-200 bg-sky-200/60 backdrop-blur p-6 shadow-[0_16px_30px_-18px_rgba(2,132,199,0.35)]">
+                            <div class="mb-4">
+                                <h3 class="text-base font-semibold text-slate-900">Two-Factor Authentication</h3>
+                                <p class="mt-1 text-sm text-slate-600">Tambahkan OTP saat login.</p>
+                            </div>
+
+                            @include('profile.partials.two-factor-form')
+                        </div>
+
                     </div>
 
                     {{-- Note / footer --}}

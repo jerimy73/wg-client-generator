@@ -36,6 +36,8 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        $request->session()->forget('2fa_passed');
+        
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
